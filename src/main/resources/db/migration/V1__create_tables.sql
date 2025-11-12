@@ -10,7 +10,11 @@ CREATE TABLE usuarios (
 CREATE TABLE empresas (
     id_empresa SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL UNIQUE,
-    cnpj VARCHAR(14) NOT NULL UNIQUE
+    cnpj VARCHAR(14) NOT NULL UNIQUE,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    senha VARCHAR(200) NOT NULL,
+    refresh_token VARCHAR(200),
+    expira_refresh_token TIMESTAMP
 );
 
 CREATE TABLE vagas (
@@ -53,14 +57,4 @@ CREATE TABLE vaga_habilidade (
     vaga_id INT NOT NULL REFERENCES vagas(id_vaga) ON DELETE CASCADE,
     habilidade_id INT NOT NULL REFERENCES habilidades(id_habilidade) ON DELETE CASCADE,
     CONSTRAINT unq_vaga_habilidade UNIQUE (vaga_id, habilidade_id)
-);
-
-CREATE TABLE auditoria_log (
-    id_auditoria SERIAL PRIMARY KEY,
-    nome_tabela VARCHAR(50) NOT NULL,
-    operacao VARCHAR(10) NOT NULL,
-    registro_id INT,
-    usuario_banco VARCHAR(50) DEFAULT CURRENT_USER,
-    data_operacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    detalhe VARCHAR(4000)
 );

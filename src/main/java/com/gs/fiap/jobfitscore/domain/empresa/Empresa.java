@@ -1,4 +1,4 @@
-package com.gs.fiap.jobfitscore.domain.usuario;
+package com.gs.fiap.jobfitscore.domain.empresa;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -11,44 +11,35 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "usuarios")
+@Table(name = "empresas")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Usuario implements UserDetails {
+public class Empresa implements UserDetails {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_usuario")
+	@Column(name = "id_empresa")
 	private Long id;
 	
-	@Column(nullable = false, length = 100)
+	@Column(nullable = false, length = 100, unique = true)
 	private String nome;
 	
-	@Column(nullable = false, unique = true, length = 100)
+	@Column(nullable = false, length = 14, unique = true)
+	private String cnpj;
+	
+	@Column(nullable = false, length = 100, unique = true)
 	private String email;
 	
 	@Column(nullable = false, length = 200)
 	private String senha;
 	
-	@Column(name = "refresh_token", nullable = true)
+	@Column(name = "refresh_token")
 	private String refreshToken;
 	
-	@Column(name = "expira_refresh_token", nullable = true)
+	@Column(name = "expira_refresh_token")
 	private LocalDateTime expiracaoRefreshToken;
-	
-	public void setId(Long id) { this.id = id; }
-	
-	public void setNome(String nome) { this.nome = nome; }
-	
-	public void setEmail(String email) { this.email = email; }
-	
-	public void setSenha(String senha) { this.senha = senha; }
-	
-	public void setRefreshToken(String refreshToken) { this.refreshToken = refreshToken; }
-	
-	public void setExpiracaoRefreshToken(LocalDateTime expiracaoRefreshToken) { this.expiracaoRefreshToken = expiracaoRefreshToken; }
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -67,12 +58,11 @@ public class Usuario implements UserDetails {
 	
 	public String novoRefreshToken() {
 		this.refreshToken = UUID.randomUUID().toString();
-		this.expiracaoRefreshToken = LocalDateTime.now().plusMinutes( 120 );
+		this.expiracaoRefreshToken = LocalDateTime.now().plusMinutes(120);
 		return refreshToken;
 	}
 	
 	public boolean refreshTokenExpirado() {
-		return expiracaoRefreshToken.isBefore( LocalDateTime.now() );
+		return expiracaoRefreshToken != null && expiracaoRefreshToken.isBefore(LocalDateTime.now());
 	}
 }
-

@@ -5,7 +5,6 @@ import com.gs.fiap.jobfitscore.domain.usuario.UsuarioService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/usuarios")
@@ -19,23 +18,22 @@ public class UsuarioController {
 	
 	@GetMapping( "/listar" )
 	public List<UsuarioDTO> listar() {
-		return uS.listarUsuariosDTO();
+		return uS.listarUsuarios();
 	}
 	
 	@GetMapping("/buscar-por-id/{id}")
 	public UsuarioDTO buscar(@PathVariable Long id) {
-		return uS.buscarUsuarioPorIdDTO(id);
+		return uS.buscarUsuarioPorId(id);
 	}
 	
 	@PostMapping("/cadastrar")
-	public Usuario criar(@RequestBody Usuario usuario) {
+	public UsuarioDTO criar(@RequestBody Usuario usuario) {
 		return uS.salvarUsuario(usuario);
 	}
 	
 	@PutMapping("/atualizar/{id}")
-	public Usuario atualizar(@PathVariable Long id, @RequestBody Usuario usuario) {
-		usuario.setId(id);
-		return uS.atualizarUsuario(id, usuario );
+	public UsuarioDTO atualizar(@PathVariable Long id, @RequestBody Usuario usuario) {
+		return uS.atualizarUsuario(id, usuario);
 	}
 	
 	@DeleteMapping("/deletar/{id}")

@@ -2,9 +2,6 @@ package com.gs.fiap.jobfitscore.domain.usuario;
 
 import com.gs.fiap.jobfitscore.infra.exception.RegraDeNegocioException;
 import jakarta.transaction.Transactional;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class UsuarioService implements UserDetailsService {
+public class UsuarioService {
 	
 	private final UsuarioRepository repository;
 	private final PasswordEncoder encoder;
@@ -22,47 +19,46 @@ public class UsuarioService implements UserDetailsService {
 		this.encoder = encoder;
 	}
 	
-	public List<UsuarioDTO> listarUsuariosDTO() {
+	public List<UsuarioDTO> listarUsuarios() {
 		return repository.findAll().stream().map( UsuarioDTO::fromEntity ).toList();
 	}
 	
-	public UsuarioDTO buscarUsuarioPorIdDTO( Long id ) {
+	public UsuarioDTO buscarUsuarioPorId( Long id ) {
 		Usuario usuario = repository.findById( id ).orElseThrow( () -> new RegraDeNegocioException( "Usuário de ID: " + id + " não encontrado." ) );
 		return UsuarioDTO.fromEntity( usuario );
 	}
 	
 	@Transactional
-	public Usuario salvarUsuario( Usuario usuario ) {
-		usuario.setSenha( encoder.encode( usuario.getSenha() ) );
-		return repository.save( usuario );
+	public UsuarioDTO salvarUsuario(Usuario usuario) {
+		usuario.setSenha(encoder.encode(usuario.getSenha()));
+		Usuario salvo = repository.save(usuario);
+		return UsuarioDTO.fromEntity(salvo);
 	}
 	
 	@Transactional
-	public Usuario atualizarUsuario( Long id, Usuario usuarioAtualizado ) {
-		Usuario usuario = repository.findById( id ).orElseThrow( () -> new RegraDeNegocioException( "Usuário de ID: " + id + " não encontrado." ) );
+	public UsuarioDTO atualizarUsuario(Long id, Usuario usuarioAtualizado) {
+		Usuario usuario = repository.findById(id)
+				.orElseThrow(() -> new RegraDeNegocioException("Usuário de ID: " + id + " não encontrado."));
 		
-		if ( usuarioAtualizado.getNome() != null && !usuarioAtualizado.getNome().isBlank() ) {
-			usuario.setNome( usuarioAtualizado.getNome() );
+		if (usuarioAtualizado.getNome() != null && !usuarioAtualizado.getNome().isBlank()) {
+			usuario.setNome(usuarioAtualizado.getNome());
 		}
 		
-		if ( usuarioAtualizado.getEmail() != null && !usuarioAtualizado.getEmail().isBlank() ) {
-			usuario.setEmail( usuarioAtualizado.getEmail() );
+		if (usuarioAtualizado.getEmail() != null && !usuarioAtualizado.getEmail().isBlank()) {
+			usuario.setEmail(usuarioAtualizado.getEmail());
 		}
 		
-		if ( usuarioAtualizado.getSenha() != null && !usuarioAtualizado.getSenha().isBlank() ) {
-			usuario.setSenha( encoder.encode( usuarioAtualizado.getSenha() ) );
+		if (usuarioAtualizado.getSenha() != null && !usuarioAtualizado.getSenha().isBlank()) {
+			usuario.setSenha(encoder.encode(usuarioAtualizado.getSenha()));
 		}
-		return repository.save( usuario );
+		
+		Usuario salvo = repository.save(usuario);
+		return UsuarioDTO.fromEntity(salvo);
 	}
 	
 	@Transactional
 	public void deletarUsuario( Long id ) {
 		repository.deleteById( id );
-	}
-	
-	@Override
-	public UserDetails loadUserByUsername( String email ) throws UsernameNotFoundException {
-		return repository.findByEmailIgnoreCase( email ).orElseThrow( () -> new UsernameNotFoundException( "Usuário não encontrado!" ) );
 	}
 	
 	@Transactional
