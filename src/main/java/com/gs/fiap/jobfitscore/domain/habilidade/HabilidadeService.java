@@ -1,6 +1,8 @@
 package com.gs.fiap.jobfitscore.domain.habilidade;
 
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,12 +16,11 @@ public class HabilidadeService {
 		this.hR = hR;
 	}
 	
-	public List<HabilidadeDTO> listarHabilidades() {
-		return hR.findAll()
-				.stream()
-				.map(HabilidadeDTO::fromEntity)
-				.collect(Collectors.toList());
+	public Page<HabilidadeDTO> listarHabilidades( Pageable pageable) {
+		return hR.findAll(pageable)
+				.map(HabilidadeDTO::fromEntity);
 	}
+	
 	
 	public HabilidadeDTO buscarHabilidadePorId(Long id) {
 		Habilidade h = hR.findById(id)

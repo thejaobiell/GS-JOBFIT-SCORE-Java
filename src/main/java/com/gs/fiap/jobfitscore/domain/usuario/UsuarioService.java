@@ -2,6 +2,8 @@ package com.gs.fiap.jobfitscore.domain.usuario;
 
 import com.gs.fiap.jobfitscore.infra.exception.RegraDeNegocioException;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +21,9 @@ public class UsuarioService {
 		this.encoder = encoder;
 	}
 	
-	public List<UsuarioDTO> listarUsuarios() {
-		return repository.findAll().stream().map( UsuarioDTO::fromEntity ).toList();
+	public Page<UsuarioDTO> listarUsuarios( Pageable pageable) {
+		return repository.findAll(pageable)
+				.map(UsuarioDTO::fromEntity);
 	}
 	
 	public UsuarioDTO buscarUsuarioPorId( Long id ) {

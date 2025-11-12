@@ -3,9 +3,16 @@ package com.gs.fiap.jobfitscore.controller;
 import com.gs.fiap.jobfitscore.domain.vaga.VagaDTO;
 import com.gs.fiap.jobfitscore.domain.vaga.VagaService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/vagas")
@@ -18,8 +25,21 @@ public class VagaController {
 	}
 	
 	@GetMapping("/listar")
-	public List<VagaDTO> listar() {
-		return vS.listarVagas();
+	public ResponseEntity<Map<String, Object>> listar(
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size,
+			@RequestParam(defaultValue = "id") String sortBy) {
+		
+		Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+		Page<VagaDTO> pageVagas = vS.listarVagas(pageable);
+		
+		Map<String, Object> response = new HashMap<>();
+		response.put("content", pageVagas.getContent());
+		response.put("currentPage", pageVagas.getNumber());
+		response.put("totalItems", pageVagas.getTotalElements());
+		response.put("totalPages", pageVagas.getTotalPages());
+		
+		return ResponseEntity.ok(response);
 	}
 	
 	@GetMapping("/buscar-por-id/{id}")

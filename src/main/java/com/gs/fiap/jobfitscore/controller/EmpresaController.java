@@ -24,7 +24,7 @@ public class EmpresaController {
 	}
 	
 	@GetMapping("/buscar-por-id/{id}")
-	public EmpresaDTO buscarID(@PathVariable Long id) {
+	public EmpresaDTO buscarPorID(@PathVariable Long id) {
 		return eS.buscarEmpresaPorId(id);
 	}
 	
@@ -44,7 +44,7 @@ public class EmpresaController {
 	}
 	
 	@DeleteMapping("/deletar/{id}")
-	public ResponseEntity<Void> excluir(@PathVariable Long id) {
+	public ResponseEntity<Void> deletar(@PathVariable Long id) {
 		eS.deletarEmpresa(id);
 		return ResponseEntity.noContent().build();
 	}

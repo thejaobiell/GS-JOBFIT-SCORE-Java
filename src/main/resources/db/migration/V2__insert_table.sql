@@ -24,3 +24,22 @@ INSERT INTO habilidades (nome) VALUES
 ('Spring Boot'),
 ('PostgreSQL');
 
+INSERT INTO usuario_habilidade (usuario_id, habilidade_id) VALUES
+(1, 1),
+(2, 2),
+(3, 3);
+
+INSERT INTO cursos (nome, instituicao, carga_horaria, usuario_id) VALUES
+('Engenharia de Software', 'FIAP', 4000, 1),
+('Banco de Dados Avançado', 'Alura', 120, 2),
+('APIs REST com Spring Boot', 'FIAP', 100, 3);
+
+INSERT INTO candidaturas (usuario_id, vaga_id, status) VALUES
+(1, 1, 'Em Análise'),
+(2, 2, 'Triagem'),
+(3, 3, 'Aprovado');
+
+INSERT INTO vaga_habilidade (vaga_id, habilidade_id) VALUES
+(1, 1),
+(2, 2),
+(3, 3);
