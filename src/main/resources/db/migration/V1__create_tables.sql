@@ -3,8 +3,9 @@ CREATE TABLE usuarios (
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     senha VARCHAR(200) NOT NULL,
+    is_admin BOOLEAN NOT NULL DEFAULT FALSE,
     refresh_token VARCHAR(200),
-    expira_refresh_token TIMESTAMP
+    expiracao_refresh_token TIMESTAMP
 );
 
 CREATE TABLE empresas (
@@ -14,7 +15,7 @@ CREATE TABLE empresas (
     email VARCHAR(100) UNIQUE NOT NULL,
     senha VARCHAR(200) NOT NULL,
     refresh_token VARCHAR(200),
-    expira_refresh_token TIMESTAMP
+    expiracao_refresh_token TIMESTAMP
 );
 
 CREATE TABLE vagas (

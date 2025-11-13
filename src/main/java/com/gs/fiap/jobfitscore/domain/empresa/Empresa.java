@@ -1,8 +1,10 @@
 package com.gs.fiap.jobfitscore.domain.empresa;
 
+import com.gs.fiap.jobfitscore.domain.autenticacao.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
@@ -38,12 +40,12 @@ public class Empresa implements UserDetails {
 	@Column(name = "refresh_token")
 	private String refreshToken;
 	
-	@Column(name = "expira_refresh_token")
+	@Column(name = "expiracao_refresh_token")
 	private LocalDateTime expiracaoRefreshToken;
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return List.of();
+		return List.of(new SimpleGrantedAuthority("ROLE_" + Role.EMPRESA.name()));
 	}
 	
 	@Override
@@ -64,5 +66,9 @@ public class Empresa implements UserDetails {
 	
 	public boolean refreshTokenExpirado() {
 		return expiracaoRefreshToken != null && expiracaoRefreshToken.isBefore(LocalDateTime.now());
+	}
+	
+	public Role getRole() {
+		return Role.EMPRESA;
 	}
 }

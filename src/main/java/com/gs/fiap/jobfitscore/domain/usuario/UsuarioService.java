@@ -1,7 +1,6 @@
 package com.gs.fiap.jobfitscore.domain.usuario;
 
 import com.gs.fiap.jobfitscore.infra.exception.RegraDeNegocioException;
-import com.gs.fiap.jobfitscore.messaging.MensageriaProducer;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,7 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioService {
@@ -70,5 +69,10 @@ public class UsuarioService {
 		usuario.setRefreshToken( refreshToken );
 		usuario.setExpiracaoRefreshToken( expiracao );
 		repository.save( usuario );
+	}
+	
+	public Usuario buscarPorRefreshToken(String token) {
+		return repository.findByRefreshToken(token)
+				.orElse(null);
 	}
 }

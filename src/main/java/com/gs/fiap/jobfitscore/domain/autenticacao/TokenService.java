@@ -22,25 +22,25 @@ public class TokenService {
 	private static final String EMISSOR = "JobFit-Score";
 	
 	// ===== Usuário =====
-	public String gerarToken(Usuario usuario) {
-		return gerarTokenGenerico(usuario.getUsername());
+	public String gerarTokenUsuario( Usuario usuario) {
+		return gerarTokenAcesso(usuario.getUsername());
 	}
 	
-	public String gerarRefreshToken(Usuario usuario) {
-		return gerarRefreshTokenGenerico(usuario.getId().toString());
+	public String gerarRefreshTokenUsuario( Usuario usuario) {
+		return gerarRefreshTokenUsuario(usuario.getId().toString());
 	}
 	
 	// ===== Empresa =====
-	public String gerarToken(Empresa empresa) {
-		return gerarTokenGenerico(empresa.getEmail());
+	public String gerarTokenEmpresa(Empresa empresa) {
+		return gerarTokenAcesso(empresa.getUsername());
 	}
 	
-	public String gerarRefreshToken(Empresa empresa) {
-		return gerarRefreshTokenGenerico(empresa.getId().toString());
+	public String gerarRefreshTokenEmpresa(Empresa empresa) {
+		return gerarRefreshTokenUsuario(empresa.getId().toString());
 	}
 	
 	// ===== Genéricos =====
-	private String gerarTokenGenerico(String subject) {
+	private String gerarTokenAcesso( String subject) {
 		try {
 			Algorithm algorithm = Algorithm.HMAC256(CHAVE);
 			return JWT.create()
@@ -53,7 +53,7 @@ public class TokenService {
 		}
 	}
 	
-	private String gerarRefreshTokenGenerico(String subject) {
+	private String gerarRefreshTokenUsuario( String subject) {
 		try {
 			Algorithm algorithm = Algorithm.HMAC256(CHAVE);
 			return JWT.create()
@@ -76,21 +76,6 @@ public class TokenService {
 			return decodedJWT.getSubject();
 		} catch (JWTVerificationException exception) {
 			throw new RegraDeNegocioException("Erro ao verificar o token JWT de acesso");
-		}
-	}
-	
-	public boolean isJwtExpired(String tokenAcesso) {
-		try {
-			Algorithm algorithm = Algorithm.HMAC256(CHAVE);
-			JWTVerifier verifier = JWT.require(algorithm)
-					.withIssuer(EMISSOR)
-					.build();
-			
-			DecodedJWT decodedJWT = verifier.verify(tokenAcesso);
-			Instant exp = decodedJWT.getExpiresAt().toInstant();
-			return Instant.now().isAfter(exp);
-		} catch (JWTVerificationException e) {
-			return true;
 		}
 	}
 	

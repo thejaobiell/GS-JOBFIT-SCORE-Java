@@ -74,4 +74,9 @@ public class EmpresaService {
 		empresa.setExpiracaoRefreshToken(expiracao);
 		repository.save(empresa);
 	}
+	
+	public Empresa buscarPorRefreshToken(String token) {
+		return repository.findByRefreshToken(token)
+				.orElse(null);
+	}
 }
