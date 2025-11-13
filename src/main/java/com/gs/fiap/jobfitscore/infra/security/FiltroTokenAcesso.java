@@ -36,7 +36,6 @@ public class FiltroTokenAcesso extends OncePerRequestFilter {
 			try {
 				String email = tokenService.getSubject(token);
 				
-				// CORREÇÃO: Verifica se já não está autenticado
 				if (SecurityContextHolder.getContext().getAuthentication() == null) {
 					UserDetails autenticado = userDetailsService.loadUserByUsername(email);
 					
@@ -46,7 +45,6 @@ public class FiltroTokenAcesso extends OncePerRequestFilter {
 				}
 				
 			} catch (Exception e) {
-				// LOG: Adicione logging aqui para debug
 				System.err.println("Erro ao validar token: " + e.getMessage());
 			}
 		}
