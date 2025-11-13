@@ -43,8 +43,9 @@ public class CandidaturaController {
 	}
 	
 	@PostMapping("/cadastrar")
-	public CandidaturaDTO criar( @Valid @RequestBody CandidaturaDTO dto) {
-		return cS.cadastrarCandidatura(dto);
+	public ResponseEntity<CandidaturaDTO> criar(@Valid @RequestBody CandidaturaDTO dto) {
+		CandidaturaDTO criada = cS.cadastrarCandidatura(dto);
+		return ResponseEntity.status(201).body(criada);
 	}
 	
 	@GetMapping("/buscar-por-id/{id}")
@@ -63,12 +64,13 @@ public class CandidaturaController {
 	}
 	
 	@PutMapping("/atualizar/{id}")
-	public CandidaturaDTO atualizar( @PathVariable Long id, @Valid @RequestBody CandidaturaDTO dto) {
-		return cS.atualizarCandidatura(id, dto);
+	public ResponseEntity<CandidaturaDTO> atualizar(@PathVariable Long id, @Valid @RequestBody CandidaturaDTO dto) {
+		CandidaturaDTO atualizada = cS.atualizarCandidatura(id, dto);
+		return ResponseEntity.ok(atualizada);
 	}
 	
 	@DeleteMapping("/deletar/{id}")
-	public ResponseEntity<Void> excluir( @PathVariable Long id) {
+	public ResponseEntity<Void> excluir(@PathVariable Long id) {
 		cS.deletarCandidatura(id);
 		return ResponseEntity.noContent().build();
 	}

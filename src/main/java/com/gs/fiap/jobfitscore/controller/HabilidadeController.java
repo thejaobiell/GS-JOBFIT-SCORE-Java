@@ -43,22 +43,26 @@ public class HabilidadeController {
 	}
 	
 	@GetMapping("/buscar-por-id/{id}")
-	public HabilidadeDTO buscarPorId(@PathVariable Long id) {
-		return hS.buscarHabilidadePorId(id);
+	public ResponseEntity<HabilidadeDTO> buscarPorId(@PathVariable Long id) {
+		HabilidadeDTO dto = hS.buscarHabilidadePorId(id);
+		return ResponseEntity.ok(dto);
 	}
 	
 	@PostMapping("/cadastrar")
-	public HabilidadeDTO criar(@Valid @RequestBody HabilidadeDTO dto) {
-		return hS.cadastrarHabilidade(dto);
+	public ResponseEntity<HabilidadeDTO> criar(@Valid @RequestBody HabilidadeDTO dto) {
+		HabilidadeDTO criado = hS.cadastrarHabilidade(dto);
+		return ResponseEntity.status(201).body(criado);
 	}
 	
 	@PutMapping("/atualizar/{id}")
-	public HabilidadeDTO atualizar(@PathVariable Long id, @Valid @RequestBody HabilidadeDTO dto) {
-		return hS.atualizarHabilidade(id, dto);
+	public ResponseEntity<HabilidadeDTO> atualizar(@PathVariable Long id, @Valid @RequestBody HabilidadeDTO dto) {
+		HabilidadeDTO atualizado = hS.atualizarHabilidade(id, dto);
+		return ResponseEntity.ok(atualizado);
 	}
 	
 	@DeleteMapping("/deletar/{id}")
-	public void deletar(@PathVariable Long id) {
+	public ResponseEntity<Void> deletar(@PathVariable Long id) {
 		hS.deletarHabilidade(id);
+		return ResponseEntity.noContent().build();
 	}
 }

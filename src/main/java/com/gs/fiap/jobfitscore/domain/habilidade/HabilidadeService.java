@@ -1,6 +1,7 @@
 package com.gs.fiap.jobfitscore.domain.habilidade;
 
 import jakarta.transaction.Transactional;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ public class HabilidadeService {
 		this.hR = hR;
 	}
 	
+	@Cacheable("habilidades")
 	public Page<HabilidadeDTO> listarHabilidades( Pageable pageable) {
 		return hR.findAll(pageable)
 				.map(HabilidadeDTO::fromEntity);

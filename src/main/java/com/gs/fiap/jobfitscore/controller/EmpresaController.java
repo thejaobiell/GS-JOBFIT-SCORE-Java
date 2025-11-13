@@ -19,28 +19,27 @@ public class EmpresaController {
 	}
 	
 	@GetMapping("/listar")
-	public List<EmpresaDTO> listar() {
-		return eS.listarEmpresas();
+	public ResponseEntity<List<EmpresaDTO>> listar() {
+		List<EmpresaDTO> empresas = eS.listarEmpresas();
+		return ResponseEntity.ok(empresas);
 	}
 	
 	@GetMapping("/buscar-por-id/{id}")
-	public EmpresaDTO buscarPorID(@PathVariable Long id) {
-		return eS.buscarEmpresaPorId(id);
+	public ResponseEntity<EmpresaDTO> buscarPorID(@PathVariable Long id) {
+		EmpresaDTO empresa = eS.buscarEmpresaPorId(id);
+		return ResponseEntity.ok(empresa);
 	}
 	
 	@GetMapping("/buscar-por-cnpj")
-	public EmpresaDTO buscarCNPJ(@RequestParam String cnpj) {
-		return eS.buscarEmpresaPorCNPJ(cnpj);
-	}
-	
-	@PostMapping("/cadastrar")
-	public EmpresaDTO criar(@RequestBody Empresa empresa) {
-		return eS.salvarEmpresa(empresa);
+	public ResponseEntity<EmpresaDTO> buscarCNPJ(@RequestParam String cnpj) {
+		EmpresaDTO empresa = eS.buscarEmpresaPorCNPJ(cnpj);
+		return ResponseEntity.ok(empresa);
 	}
 	
 	@PutMapping("/atualizar/{id}")
-	public EmpresaDTO atualizar(@PathVariable Long id, @RequestBody Empresa empresa) {
-		return eS.atualizarEmpresa(id, empresa);
+	public ResponseEntity<EmpresaDTO> atualizar(@PathVariable Long id, @RequestBody Empresa empresa) {
+		EmpresaDTO atualizada = eS.atualizarEmpresa(id, empresa);
+		return ResponseEntity.ok(atualizada); // 200 OK
 	}
 	
 	@DeleteMapping("/deletar/{id}")

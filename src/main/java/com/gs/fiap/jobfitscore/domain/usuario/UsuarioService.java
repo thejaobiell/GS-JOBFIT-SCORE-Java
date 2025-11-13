@@ -1,6 +1,7 @@
 package com.gs.fiap.jobfitscore.domain.usuario;
 
 import com.gs.fiap.jobfitscore.infra.exception.RegraDeNegocioException;
+import com.gs.fiap.jobfitscore.messaging.MensageriaProducer;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +17,7 @@ public class UsuarioService {
 	private final UsuarioRepository repository;
 	private final PasswordEncoder encoder;
 	
-	public UsuarioService( UsuarioRepository repository, PasswordEncoder encoder ) {
+	public UsuarioService( UsuarioRepository repository, PasswordEncoder encoder) {
 		this.repository = repository;
 		this.encoder = encoder;
 	}

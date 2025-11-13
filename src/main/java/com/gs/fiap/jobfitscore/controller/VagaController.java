@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -43,22 +42,26 @@ public class VagaController {
 	}
 	
 	@GetMapping("/buscar-por-id/{id}")
-	public VagaDTO buscar(@PathVariable Long id) {
-		return vS.buscarVagaPorId(id);
+	public ResponseEntity<VagaDTO> buscar(@PathVariable Long id) {
+		VagaDTO dto = vS.buscarVagaPorId(id);
+		return ResponseEntity.ok(dto);
 	}
 	
 	@PostMapping("/cadastrar")
-	public VagaDTO criar(@Valid @RequestBody VagaDTO vagaDTO) {
-		return vS.cadastrarVaga(vagaDTO);
+	public ResponseEntity<VagaDTO> criar(@Valid @RequestBody VagaDTO vagaDTO) {
+		VagaDTO criado = vS.cadastrarVaga(vagaDTO);
+		return ResponseEntity.status(201).body(criado);
 	}
 	
 	@PutMapping("/atualizar/{id}")
-	public VagaDTO atualizar(@PathVariable Long id, @Valid @RequestBody VagaDTO vagaDTO) {
-		return vS.atualizarVaga(id, vagaDTO);
+	public ResponseEntity<VagaDTO> atualizar(@PathVariable Long id, @Valid @RequestBody VagaDTO vagaDTO) {
+		VagaDTO atualizado = vS.atualizarVaga(id, vagaDTO);
+		return ResponseEntity.ok(atualizado);
 	}
 	
 	@DeleteMapping("/deletar/{id}")
-	public void deletar(@PathVariable Long id) {
+	public ResponseEntity<Void> deletar(@PathVariable Long id) {
 		vS.deletarVaga(id);
+		return ResponseEntity.noContent().build();
 	}
 }

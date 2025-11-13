@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.gs.fiap</groupId>
 	<artifactId>jobfitscore</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>jobfitscore</name>
 	<description>JOBFIT-SCORE Joao Gabriel Boaventura Marques e Silva - RM554874 - 2TDSB-2025 / Leo Mota Lima - RM557851 - 2TDSB-2025 / Lucas Leal das Chagas - RM551124 - 2TDSB-2025 </description>
 	<url/>

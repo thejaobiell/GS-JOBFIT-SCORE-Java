@@ -2,6 +2,7 @@ package com.gs.fiap.jobfitscore.domain.vaga;
 
 import com.gs.fiap.jobfitscore.domain.empresa.Empresa;
 import com.gs.fiap.jobfitscore.domain.empresa.EmpresaRepository;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class VagaService {
 		this.eR = eR;
 	}
 	
+	@Cacheable("vagas")
 	public Page<VagaDTO> listarVagas( Pageable pageable) {
 		return vR.findAll(pageable)
 				.map(VagaDTO::fromEntity);

@@ -3,6 +3,7 @@ package com.gs.fiap.jobfitscore.controller;
 import com.gs.fiap.jobfitscore.domain.usuariohabilidade.UsuarioHabilidadeDTO;
 import com.gs.fiap.jobfitscore.domain.usuariohabilidade.UsuarioHabilidadeService;
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,27 +19,33 @@ public class UsuarioHabilidadeController {
 	}
 	
 	@GetMapping("/listar")
-	public List<UsuarioHabilidadeDTO> listar() {
-		return uhS.listar();
+	public ResponseEntity<List<UsuarioHabilidadeDTO>> listar() {
+		List<UsuarioHabilidadeDTO> lista = uhS.listar();
+		return ResponseEntity.ok(lista);
 	}
 	
 	@GetMapping("/buscar-por-id/{id}")
-	public UsuarioHabilidadeDTO buscar(@PathVariable Long id) {
-		return uhS.buscarPorId(id);
+	public ResponseEntity<UsuarioHabilidadeDTO> buscar(@PathVariable Long id) {
+		UsuarioHabilidadeDTO dto = uhS.buscarPorId(id);
+		return ResponseEntity.ok(dto);
 	}
 	
 	@GetMapping("/buscar-por-usuario/{usuarioId}")
-	public List<UsuarioHabilidadeDTO> buscarPorUsuario(@PathVariable Long usuarioId) {
-		return uhS.buscarPorUsuario(usuarioId);
+	public ResponseEntity<List<UsuarioHabilidadeDTO>> buscarPorUsuario(@PathVariable Long usuarioId) {
+		List<UsuarioHabilidadeDTO> lista = uhS.buscarPorUsuario(usuarioId);
+		return ResponseEntity.ok(lista);
 	}
 	
 	@PostMapping("/cadastrar")
-	public UsuarioHabilidadeDTO cadastrar(@Valid @RequestBody UsuarioHabilidadeDTO dto) {
-		return uhS.cadastrar(dto);
+	public ResponseEntity<UsuarioHabilidadeDTO> cadastrar(@Valid @RequestBody UsuarioHabilidadeDTO dto) {
+		UsuarioHabilidadeDTO criado = uhS.cadastrar(dto);
+		return ResponseEntity.status(201).body(criado);
 	}
 	
 	@DeleteMapping("/deletar/{id}")
-	public void deletar(@PathVariable Long id) {
+	public ResponseEntity<Void> deletar(@PathVariable Long id) {
 		uhS.deletar(id);
+		return ResponseEntity.noContent().build();
 	}
 }
+

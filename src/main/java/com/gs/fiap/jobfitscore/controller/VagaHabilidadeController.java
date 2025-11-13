@@ -18,23 +18,27 @@ public class VagaHabilidadeController {
 	}
 	
 	@PostMapping("/cadastrar")
-	public VagaHabilidadeDTO cadastrar(@RequestBody VagaHabilidadeDTO dto) {
-		return vhS.cadastrar(dto);
+	public ResponseEntity<VagaHabilidadeDTO> cadastrar(@RequestBody VagaHabilidadeDTO dto) {
+		VagaHabilidadeDTO criado = vhS.cadastrar(dto);
+		return ResponseEntity.status(201).body(criado);
 	}
 	
 	@GetMapping("/listar")
-	public List<VagaHabilidadeDTO> listar() {
-		return vhS.listar();
+	public ResponseEntity<List<VagaHabilidadeDTO>> listar() {
+		List<VagaHabilidadeDTO> lista = vhS.listar();
+		return ResponseEntity.ok(lista);
 	}
 	
 	@GetMapping("/buscar-por-vaga")
-	public List<VagaHabilidadeDTO> buscarPorVaga(@RequestParam Long vagaId) {
-		return vhS.buscarPorVaga(vagaId);
+	public ResponseEntity<List<VagaHabilidadeDTO>> buscarPorVaga(@RequestParam Long vagaId) {
+		List<VagaHabilidadeDTO> lista = vhS.buscarPorVaga(vagaId);
+		return ResponseEntity.ok(lista);
 	}
 	
 	@GetMapping("/buscar-por-habilidade")
-	public List<VagaHabilidadeDTO> buscarPorHabilidade(@RequestParam Long habilidadeId) {
-		return vhS.buscarPorHabilidade(habilidadeId);
+	public ResponseEntity<List<VagaHabilidadeDTO>> buscarPorHabilidade(@RequestParam Long habilidadeId) {
+		List<VagaHabilidadeDTO> lista = vhS.buscarPorHabilidade(habilidadeId);
+		return ResponseEntity.ok(lista);
 	}
 	
 	@DeleteMapping("/deletar/{id}")

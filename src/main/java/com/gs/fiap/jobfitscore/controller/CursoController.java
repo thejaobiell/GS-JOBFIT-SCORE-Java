@@ -3,6 +3,7 @@ package com.gs.fiap.jobfitscore.controller;
 import com.gs.fiap.jobfitscore.domain.curso.CursoDTO;
 import com.gs.fiap.jobfitscore.domain.curso.CursoService;
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -16,33 +17,39 @@ public class CursoController {
 		this.cS = cS;
 	}
 	
-	@PostMapping("/cadastrar")
-	public CursoDTO cadastrar(@Valid @RequestBody CursoDTO dto) {
-		return cS.cadastrar(dto);
+	@GetMapping("/listar")
+	public ResponseEntity<List<CursoDTO>> listar() {
+		List<CursoDTO> cursos = cS.listar();
+		return ResponseEntity.ok(cursos);
 	}
 	
-	@GetMapping("/listar")
-	public List<CursoDTO> listar() {
-		return cS.listar();
+	@PostMapping("/cadastrar")
+	public ResponseEntity<CursoDTO> cadastrar( @Valid @RequestBody CursoDTO dto) {
+		CursoDTO criado = cS.cadastrar(dto);
+		return ResponseEntity.status(201).body(criado);
 	}
 	
 	@GetMapping("/buscar-por-id/{id}")
-	public CursoDTO buscarPorId(@PathVariable Long id) {
-		return cS.buscarPorId(id);
+	public ResponseEntity<CursoDTO> buscarPorId(@PathVariable Long id) {
+		CursoDTO curso = cS.buscarPorId(id);
+		return ResponseEntity.ok(curso);
 	}
 	
 	@GetMapping("/buscar-por-usuario/{usuarioId}")
-	public List<CursoDTO> buscarPorUsuario(@PathVariable Long usuarioId) {
-		return cS.buscarPorUsuario(usuarioId);
+	public ResponseEntity<List<CursoDTO>> buscarPorUsuario(@PathVariable Long usuarioId) {
+		List<CursoDTO> cursos = cS.buscarPorUsuario(usuarioId);
+		return ResponseEntity.ok(cursos);
 	}
 	
 	@PutMapping("/atualizar/{id}")
-	public CursoDTO atualizar(@PathVariable Long id, @Valid @RequestBody CursoDTO dto) {
-		return cS.atualizar(id, dto);
+	public ResponseEntity<CursoDTO> atualizar(@PathVariable Long id, @Valid @RequestBody CursoDTO dto) {
+		CursoDTO atualizado = cS.atualizar(id, dto);
+		return ResponseEntity.ok(atualizado);
 	}
 	
 	@DeleteMapping("/deletar/{id}")
-	public void deletar(@PathVariable Long id) {
+	public ResponseEntity<Void> deletar(@PathVariable Long id) {
 		cS.deletar(id);
+		return ResponseEntity.noContent().build();
 	}
 }
