@@ -94,7 +94,7 @@ src/main/java/com/gs/fiap/jobfitscore/
        │ herda permissões de
    ┌───┴───────┐
    │           │
-┌──▼───┐   ┌──▼────┐
+┌──▼────┐   ┌──▼────┐
 │USUARIO│   │EMPRESA│  ← Mesmo nível, sem herança entre si
 └───────┘   └───────┘
 ```
@@ -192,6 +192,27 @@ Content-Type: application/json
 {
   "email": "joao.gabriel@jobfitscore.com",
   "senha": "joaogab"
+}
+```
+
+**Resposta (200 OK):**
+```json
+{
+  "tokenAcesso": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "refreshToken": "550e8400-e29b-41d4-a716-446655440000",
+  "expiracaoRefreshToken": "2025-11-20T10:30:00"
+}
+```
+
+#### Atulizar JWT
+Autentica um usuário ou empresa no sistema e retorna os tokens de acesso.
+
+```http
+POST /api/autenticacao/atualizar-token
+Content-Type: application/json
+
+{
+  "refreshToken": {{refreshtoken}}
 }
 ```
 
@@ -999,9 +1020,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
 ```
 db/migration/
-├── V1__create_tables.sql    # Criação das tabelas
-├── V2__insert_data.sql      # Dados iniciais (usuários e empresas)
-└── V3__insert_admin.sql     # Usuário administrador
+├── V1__create_tables.sql   	 # Criação das tabelas
+├── V2__insert_table.sql      	 # Inserção de dados
+└── V3__insert_table-admin.sql   # Usuário administrador
 ```
 
 ### Diagrama de Relacionamentos
@@ -1018,13 +1039,25 @@ usuarios ──┬── usuario_habilidade ──── habilidades
 
 ---
 
-### Usando Postman ou Insomnia
+### Usando Postman
 
-1. Crie uma requisição POST para `/api/autenticacao/login`
-2. Copie o `tokenAcesso` da resposta
-3. Em todas as outras requisições, adicione o header:
-    - **Key:** `Authorization`
-    - **Value:** `Bearer {seu_token}`
+1. **Importar a coleção**
+   Importe o arquivo [`postman/JobFit-Score.postman_collection.json`](https://github.com/thejaobiell/GS-Java/blob/main/postman/JobFit-Score.postman_collection.json)
+2. **Obter o JWT**
+
+   * Abra a pasta `0-JWT` → `Pegar o JWT`.
+   * Faça login usando um dos usuários cadastrados.
+   * Na resposta, copie o valor do campo `tokenAcesso`.
+
+3. **Salvar o JWT como variável**
+
+   * Selecione o valor de `tokenAcesso` (sem aspas).
+   * Clique com o botão direito → **Set as variable**.
+   * Clique em `jwt` para setar o valor da variavel com o tokenAcesso.
+
+4. **Use a API**
+
+   * Dependendo de qual conta você utilizou você pode ter acesso restrito a alguns endpoints(como mostrado acima).
 
 ---
 
