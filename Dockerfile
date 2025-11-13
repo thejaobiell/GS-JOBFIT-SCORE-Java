@@ -1,12 +1,12 @@
 FROM maven:3.9.11-eclipse-temurin-21-alpine AS builder
 WORKDIR /app
 
-COPY jobfitscore/pom.xml jobfitscore/mvnw ./
-COPY jobfitscore/.mvn .mvn
+COPY pom.xml mvnw ./
+COPY .mvn .mvn
 RUN chmod +x mvnw
 RUN ./mvnw dependency:go-offline -B
 
-COPY jobfitscore/src ./src
+COPY src ./src
 RUN ./mvnw package -DskipTests -B
 
 RUN mv target/jobfitscore-*.jar app.jar
