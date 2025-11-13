@@ -47,6 +47,14 @@ public class SecurityConfig {
 						.requestMatchers("/api/autenticacao/**").permitAll()
 						.requestMatchers("/api/usuarios/cadastrar").permitAll()
 						.requestMatchers("/api/empresas/cadastrar").permitAll()
+						.requestMatchers(
+								"/",
+								"/index.html",
+								"/style.css",
+								"/logo.jpeg",
+								"/images/**",
+								"/static/**"
+						).permitAll()
 						
 						.requestMatchers(
 								"/v3/api-docs/**",
@@ -57,15 +65,12 @@ public class SecurityConfig {
 						).permitAll()
 						
 						// Endpoints específicos de usuários
-						// ADMIN herda automaticamente acesso via hierarquia
 						.requestMatchers("/api/usuarios/atualizar", "/api/usuarios/deletar").hasRole(Role.USUARIO.name())
 						
 						// Endpoints específicos de empresas
-						// ADMIN herda automaticamente acesso via hierarquia
 						.requestMatchers("/api/empresas/atualizar", "/api/empresas/deletar").hasRole(Role.EMPRESA.name())
 						
 						// Recursos compartilhados entre USUARIO e EMPRESA
-						// ADMIN herda acesso de ambos via hierarquia
 						.requestMatchers(
 								"/api/cursos/**",
 								"/api/vagas/**",
@@ -74,8 +79,6 @@ public class SecurityConfig {
 								"/api/usuario-habilidade/**",
 								"/api/candidaturas/**"
 						).hasAnyRole(Role.USUARIO.name(), Role.EMPRESA.name())
-						
-						// Qualquer outra requisição requer autenticação
 						.anyRequest().authenticated()
 				)
 				.authenticationProvider(authenticationProvider())
