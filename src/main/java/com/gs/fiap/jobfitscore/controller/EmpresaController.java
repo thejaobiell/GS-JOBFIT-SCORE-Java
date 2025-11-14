@@ -38,8 +38,8 @@ public class EmpresaController {
 	
 	@PostMapping("/cadastrar")
 	public ResponseEntity<EmpresaDTO> criar(@RequestBody Empresa empresa) {
-		EmpresaDTO empresa = eS.criarEmpresa(empresa);
-		return ResponseEntity.status(201).body(empresa);
+		EmpresaDTO criada = eS.criarEmpresa(empresa);
+		return ResponseEntity.status(201).body(criada);
 	}
 	
 	@PutMapping("/atualizar/{id}")
