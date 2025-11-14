@@ -159,7 +159,7 @@ spring.devtools.livereload.enabled=true
 #### Linux/MacOS
 ```bash
 # Clonando o repositório da aplicação
-git clone https://github.com/thejaobiell/GS-Java.git
+git clone https://github.com/thejaobiell/GS-JOBFIT-SCORE-Java.git
 cd GS-Java
 # Instalar dependências e executar
 ./mvnw spring-boot:run
@@ -168,7 +168,7 @@ cd GS-Java
 #### Windows
 ```bash
 # Clonando o repositório da aplicação
-git clone https://github.com/thejaobiell/GS-Java.git
+git clone https://github.com/thejaobiell/GS-JOBFIT-SCORE-Java.git
 cd GS-Java
 # Instalar dependências e executar
 .\mvnw.cmd spring-boot:run
