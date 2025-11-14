@@ -146,17 +146,9 @@ src/main/java/com/gs/fiap/jobfitscore/
 
 ### 1. Configurar o Banco de Dados
 
-```sql
--- Conectar no PostgreSQL
-psql -U postgres
+**🗄️ Database Client (VSCode)**
 
--- Criar banco de dados
-CREATE DATABASE jobfitscore;
-```
-
-## 🗄️ Database Client (VSCode)
-
-### Instalação das Extensões
+#### Instalação das Extensões
 
 1. Abra o VSCode
 2. Acesse a aba de Extensões (Ctrl+Shift+X)
@@ -189,6 +181,11 @@ CREATE DATABASE jobfitscore;
    ```
 6. Marque a opção **SSL** (obrigatório para Render)
 7. Clique em **Connect**
+
+Crie banco de dados(apenas em caso de desenvolvimento local)
+```sql
+CREATE DATABASE jobfitscore;
+```
 
 ### 2. Clonando a Aplicação
 
