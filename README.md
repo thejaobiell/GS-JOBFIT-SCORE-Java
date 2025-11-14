@@ -1,8 +1,33 @@
-# 🎯 JobFitScore
+<div align="center">
+  <img src="https://raw.githubusercontent.com/thejaobiell/GS-JOBFIT-SCORE-Java/refs/heads/main/src/main/resources/static/logo.jpeg" alt="MottuFlow" width="200"/>
+  <h1>JobFit-Score</h1>
+</div>
+
+![Java](https://img.shields.io/badge/Java-21-orange.svg)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen.svg)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue.svg)
+![Thymeleaf](https://img.shields.io/badge/Thymeleaf-3.x-lightgreen.svg)
+![Deploy](https://img.shields.io/badge/Deploy-Render-46E3B7.svg)
 
 ## 📋 Sobre o Projeto
 
 JobFitScore é uma plataforma que facilita o processo de recrutamento através de um sistema de pontuação baseado em habilidades. O sistema permite que empresas publiquem vagas, candidatos se inscrevam e um algoritmo inteligente calcula a compatibilidade entre perfis e oportunidades.
+
+## Links
+
+[![Ver Pitch](https://img.shields.io/badge/YouTube-Ver%20Pitch-red?style=for-the-badge&logo=youtube)](https://www.youtube.com/watch?v=21drlvKfcUk) 
+[![Ver Demonstração](https://img.shields.io/badge/YouTube-Ver%20Demonstração-red?style=for-the-badge&logo=youtube)]()
+
+[![GitHub Repositório](https://img.shields.io/badge/GitHub-Reposit%C3%B3rio-000?style=for-the-badge&logo=github)](https://github.com/thejaobiell/GS-JOBFIT-SCORE-Java)
+
+[![Postman Collection](https://img.shields.io/badge/Postman-Collection-orange?style=for-the-badge&logo=postman)](https://github.com/thejaobiell/GS-JOBFIT-SCORE-Java/blob/main/postman/JobFit-Score.postman_collection.json)
+
+### 🌐 Acesso à Aplicação
+
+| Branch | URL | Status |
+|--------|-----|--------|
+| **🚀 Deploy** | [jobfitscore.onrender.com](https://jobfitscore.onrender.com) | [![Status](https://img.shields.io/badge/Status-Online-success)](https://jobfitscore.onrender.com) |
+| **💻 Main** | http://localhost:8080 | Desenvolvimento Local |
 
 ## ✨ Funcionalidades
 
