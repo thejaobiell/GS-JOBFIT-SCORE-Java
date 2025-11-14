@@ -135,11 +135,14 @@ src/main/java/com/gs/fiap/jobfitscore/
 | `/api/candidaturas/**` | ✅ | ✅ | ✅ |
 
 ## 🚀 Como Executar
-
+## Instalação
 ### Pré-requisitos
-- Java 21+
-- PostgreSQL 16+
-- Maven 3.8+
+- **Java 21+** ([OpenJDK](https://openjdk.org/install/) ou [Oracle JDK](https://www.oracle.com/java/technologies/downloads/))
+- **PostgreSQL 17+** ([Download](https://chatgpt.com/s/t_6917897c73688191aa6901d819695298))
+- **Git** ([Download](https://git-scm.com/downloads))
+- **Database Client** (Extensão para consultar o banco de dados) 
+  - [Database Client](https://marketplace.visualstudio.com/items?itemName=cweijan.vscode-database-client2)
+  - [Database Client JDBC](https://marketplace.visualstudio.com/items?itemName=cweijan.dbclient-jdbc)
 
 ### 1. Configurar o Banco de Dados
 
