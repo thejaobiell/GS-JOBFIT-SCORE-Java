@@ -17,16 +17,16 @@ public class VagaHabilidadeController {
 		this.vhS = vhS;
 	}
 	
-	@PostMapping("/cadastrar")
-	public ResponseEntity<VagaHabilidadeDTO> cadastrar(@RequestBody VagaHabilidadeDTO dto) {
-		VagaHabilidadeDTO criado = vhS.cadastrar(dto);
-		return ResponseEntity.status(201).body(criado);
-	}
-	
 	@GetMapping("/listar")
 	public ResponseEntity<List<VagaHabilidadeDTO>> listar() {
 		List<VagaHabilidadeDTO> lista = vhS.listar();
 		return ResponseEntity.ok(lista);
+	}
+	
+	@PostMapping("/cadastrar")
+	public ResponseEntity<VagaHabilidadeDTO> cadastrar(@RequestBody VagaHabilidadeDTO dto) {
+		VagaHabilidadeDTO criado = vhS.cadastrar(dto);
+		return ResponseEntity.status(201).body(criado);
 	}
 	
 	@GetMapping("/buscar-por-vaga")
