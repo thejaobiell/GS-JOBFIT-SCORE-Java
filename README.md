@@ -269,6 +269,14 @@ Clique aqui para acessar o Swagger UI:   http://localhost:8080/swagger-ui/index.
 4. **Use a API**
 
    * Dependendo de qual conta você utilizou você pode ter acesso restrito a alguns endpoints.
+  
+
+### Variáveis de Ambiente
+- `{{url}}`: 
+  - Local: `http://localhost:8080/api`
+  - Deploy: `https://jobfitscore.onrender.com/api`
+- `{{jwt}}`: Token JWT obtido no login
+- `{{refreshtoken}}`: Token para recarregar o JWT
 
 ---
 
