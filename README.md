@@ -154,7 +154,57 @@ psql -U postgres
 CREATE DATABASE jobfitscore;
 ```
 
-### 2. Configurar application.properties
+## 🗄️ Database Client (VSCode)
+
+### Instalação das Extensões
+
+1. Abra o VSCode
+2. Acesse a aba de Extensões (Ctrl+Shift+X)
+3. Instale as seguintes extensões:
+   - **Database Client** (cweijan.vscode-database-client2)
+   - **Database Client JDBC** (cweijan.dbclient-jdbc)
+
+#### Conexão PostgreSQL 
+
+1. Clique no ícone do **Database Client** na barra lateral do VSCode
+2. Clique em **"Create Connection"** (ícone de +)
+3. Selecione **PostgreSQL**
+4. Preencha os dados:
+   * Local:
+   ```
+   Host: 127.0.0.1
+   Port: 5432
+   Username: <SEU USUARIO>
+   Password: <SUA SENHA>
+   Database: jobfitscore
+   ```
+
+   * Render:
+   ```
+   Host: dpg-d4b2k5hr0fns73el9bo0-a.oregon-postgres.render.com
+   Port: 5432
+   Username: rm554874
+   Password: D7cWaZ023TbxJvSTdOBIKY0esPBzXUw7
+   Database: jobfitscore
+   ```
+6. Marque a opção **SSL** (obrigatório para Render)
+7. Clique em **Connect**
+
+### 2. Clonando a Aplicação
+
+#### Linux/MacOS
+```bash
+git clone https://github.com/thejaobiell/GS-JOBFIT-SCORE-Java.git
+cd GS-JOBFIT-SCORE-Java
+```
+
+#### Windows
+```bash
+git clone https://github.com/thejaobiell/GS-JOBFIT-SCORE-Java.git
+cd GS-JOBFIT-SCORE-Java
+```
+
+### 3. Configurar application.properties
 
 ```properties
 spring.application.name=jobfitscore
@@ -181,33 +231,71 @@ spring.devtools.restart.enabled=true
 spring.devtools.livereload.enabled=true
 ```
 
-### 3. Executar a Aplicação
-
-#### Linux/MacOS
+### 4. Rodar a aplicação
 ```bash
-# Clonando o repositório da aplicação
-git clone https://github.com/thejaobiell/GS-JOBFIT-SCORE-Java.git
-cd GS-Java
-# Instalar dependências e executar
 ./mvnw spring-boot:run
 ```
 
-#### Windows
-```bash
-# Clonando o repositório da aplicação
-git clone https://github.com/thejaobiell/GS-JOBFIT-SCORE-Java.git
-cd GS-Java
-# Instalar dependências e executar
-.\mvnw.cmd spring-boot:run
+**Saída esperada:**
+```
+ ██████╗ ███╗   ██╗██╗     ██╗███╗   ██╗███████╗██╗
+██╔═══██╗████╗  ██║██║     ██║████╗  ██║██╔════╝██║
+██║   ██║██╔██╗ ██║██║     ██║██╔██╗ ██║█████╗  ██║
+██║   ██║██║╚██╗██║██║     ██║██║╚██╗██║██╔══╝  ╚═╝
+╚██████╔╝██║ ╚████║███████╗██║██║ ╚████║███████╗██╗
+ ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚═╝╚═╝  ╚═══╝╚══════╝╚═╝
+Clique aqui para acessar a aplicação:   http://localhost:8080
+Clique aqui para acessar o Swagger UI:   http://localhost:8080/swagger-ui/index.html
 ```
 
-A aplicação estará disponível em: `http://localhost:8080`
+---
+
+### Usando Postman
+
+1. **Importar a coleção**
+   Importe o arquivo [`postman/JobFit-Score.postman_collection.json`](https://github.com/thejaobiell/GS-Java/blob/main/postman/JobFit-Score.postman_collection.json)
+2. **Obter o JWT**
+
+   * Abra a pasta `0-JWT` → `Pegar o JWT`.
+   * Faça login usando um dos usuários cadastrados.
+   * Na resposta, copie o valor do campo `tokenAcesso`.
+
+3. **Salvar o JWT como variável**
+
+   * Selecione o valor de `tokenAcesso` (sem aspas).
+   * Clique com o botão direito → **Set as variable**.
+   * Clique em `jwt` para setar o valor da variavel com o tokenAcesso.
+
+4. **Use a API**
+
+   * Dependendo de qual conta você utilizou você pode ter acesso restrito a alguns endpoints.
+
+---
 
 ## 📡 Endpoints da API
 
 > **Nota:** Todos os endpoints (exceto `/api/autenticacao/**`) requerem autenticação via Bearer Token no header `Authorization`.
 
-### 🔐 Autenticação
+## 🔐 Autenticação
+
+### 👥 Usuários de Teste
+
+### Administrador(recomendamos usar)
+- **Email:** `admin@jobfitscore.com`
+- **Senha:** `admin`
+- **Role:** ADMIN
+
+### Usuários Normais
+**João Gabriel**
+- **Email:** `joao.gabriel@jobfitscore.com`
+- **Senha:** `joaogab`
+- **Role:** USUARIO
+
+### Empresas
+**XPTO TECH**
+- **Email:** `contato@xptotech.com`
+- **Senha:** `xptotech`
+- **Role:** EMPRESA
 
 #### Login
 Autentica um usuário ou empresa no sistema e retorna os tokens de acesso.
@@ -217,8 +305,8 @@ POST /api/autenticacao/login
 Content-Type: application/json
 
 {
-  "email": "joao.gabriel@jobfitscore.com",
-  "senha": "joaogab"
+  "email": "admin@jobfitscore.co",
+  "senha": "admin"
 }
 ```
 
@@ -995,26 +1083,6 @@ Authorization: Bearer {token}
 
 **Resposta (204 No Content)**
 
----
-
-## 👥 Usuários de Teste
-
-### Administrador
-- **Email:** `admin@jobfitscore.com`
-- **Senha:** `admin`
-- **Role:** ADMIN
-
-### Usuários Normais
-**João Gabriel**
-- **Email:** `joao.gabriel@jobfitscore.com`
-- **Senha:** `joaogab`
-- **Role:** USUARIO
-
-### Empresas
-**XPTO TECH**
-- **Email:** `contato@xptotech.com`
-- **Senha:** `xptotech`
-- **Role:** EMPRESA
 
 ---
 
@@ -1025,13 +1093,6 @@ Authorization: Bearer {token}
 - Refresh tokens válidos por **7 dias** (10.080 minutos)
 - Criptografia de senhas com **BCrypt**
 - Chave secreta para assinatura de tokens
-
-### Como Usar o Token
-Após o login, inclua o token em todas as requisições:
-
-```http
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-```
 
 ### Hierarquia de Roles
 - Implementado com `RoleHierarchy` do Spring Security
@@ -1063,28 +1124,6 @@ usuarios ──┬── usuario_habilidade ──── habilidades
                                          │
                                          └── vaga_habilidade ──── habilidades
 ```
-
----
-
-### Usando Postman
-
-1. **Importar a coleção**
-   Importe o arquivo [`postman/JobFit-Score.postman_collection.json`](https://github.com/thejaobiell/GS-Java/blob/main/postman/JobFit-Score.postman_collection.json)
-2. **Obter o JWT**
-
-   * Abra a pasta `0-JWT` → `Pegar o JWT`.
-   * Faça login usando um dos usuários cadastrados.
-   * Na resposta, copie o valor do campo `tokenAcesso`.
-
-3. **Salvar o JWT como variável**
-
-   * Selecione o valor de `tokenAcesso` (sem aspas).
-   * Clique com o botão direito → **Set as variable**.
-   * Clique em `jwt` para setar o valor da variavel com o tokenAcesso.
-
-4. **Use a API**
-
-   * Dependendo de qual conta você utilizou você pode ter acesso restrito a alguns endpoints(como mostrado acima).
 
 ---
 
@@ -1204,5 +1243,3 @@ usuarios ──┬── usuario_habilidade ──── habilidades
 </td>
 </tr>
 </table>
-
----
