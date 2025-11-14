@@ -5,7 +5,7 @@
 
 ![Java](https://img.shields.io/badge/Java-21-orange.svg)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen.svg)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue.svg)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-blue.svg)
 ![Thymeleaf](https://img.shields.io/badge/Thymeleaf-3.x-lightgreen.svg)
 ![Deploy](https://img.shields.io/badge/Deploy-Render-46E3B7.svg)
 
