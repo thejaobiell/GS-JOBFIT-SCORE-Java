@@ -41,6 +41,13 @@ public class VagaHabilidadeController {
 		return ResponseEntity.ok(lista);
 	}
 	
+	
+	@PutMapping("/atualizar/{id}")
+	public ResponseEntity<VagaHabilidadeDTO> atualizar(@PathVariable Long id, @RequestBody VagaHabilidadeDTO dto) {
+		VagaHabilidadeDTO atualizado = vhS.atualizar(id, dto);
+		return ResponseEntity.ok(atualizado);
+	}
+	
 	@DeleteMapping("/deletar/{id}")
 	public ResponseEntity<Void> deletar(@PathVariable Long id) {
 		vhS.deletar(id);
