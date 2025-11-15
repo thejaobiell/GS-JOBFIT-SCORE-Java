@@ -15,7 +15,7 @@ JobFitScore é uma plataforma que facilita o processo de recrutamento através d
 ## Links
 
 [![Ver Pitch](https://img.shields.io/badge/YouTube-Ver%20Pitch-red?style=for-the-badge&logo=youtube)](https://www.youtube.com/watch?v=21drlvKfcUk) 
-[![Ver Demonstração](https://img.shields.io/badge/YouTube-Ver%20Demonstração-red?style=for-the-badge&logo=youtube)]()
+[![Ver Demonstração](https://img.shields.io/badge/YouTube-Ver%20Demonstração-red?style=for-the-badge&logo=youtube)](https://www.youtube.com/watch?v=b7_yIofOE7k)
 
 [![GitHub Repositório](https://img.shields.io/badge/GitHub-Reposit%C3%B3rio-000?style=for-the-badge&logo=github)](https://github.com/thejaobiell/GS-JOBFIT-SCORE-Java)
 
@@ -146,9 +146,17 @@ src/main/java/com/gs/fiap/jobfitscore/
 
 ### 1. Configurar o Banco de Dados
 
-**🗄️ Database Client (VSCode)**
+```sql
+-- Conectar no PostgreSQL
+psql -U postgres
 
-#### Instalação das Extensões
+-- Criar banco de dados
+CREATE DATABASE jobfitscore;
+```
+
+## 🗄️ Database Client (VSCode)
+
+### Instalação das Extensões
 
 1. Abra o VSCode
 2. Acesse a aba de Extensões (Ctrl+Shift+X)
@@ -181,11 +189,6 @@ src/main/java/com/gs/fiap/jobfitscore/
    ```
 6. Marque a opção **SSL** (obrigatório para Render)
 7. Clique em **Connect**
-
-Crie banco de dados(apenas em caso de desenvolvimento local)
-```sql
-CREATE DATABASE jobfitscore;
-```
 
 ### 2. Clonando a Aplicação
 
