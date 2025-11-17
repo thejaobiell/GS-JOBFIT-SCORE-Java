@@ -36,6 +36,12 @@ public class EmpresaController {
 		return ResponseEntity.ok(empresa);
 	}
 	
+	@GetMapping("/buscar-por-email")
+	public ResponseEntity<EmpresaDTO> buscarEmail(@RequestParam String email) {
+		EmpresaDTO empresa = eS.buscarEmpresaPorEmail(email);
+		return ResponseEntity.ok(empresa);
+	}
+	
 	@PostMapping("/cadastrar")
 	public ResponseEntity<EmpresaDTO> criar(@RequestBody Empresa empresa) {
 		EmpresaDTO criada = eS.criarEmpresa(empresa);

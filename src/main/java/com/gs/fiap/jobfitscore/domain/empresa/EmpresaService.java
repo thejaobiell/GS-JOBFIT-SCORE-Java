@@ -35,6 +35,12 @@ public class EmpresaService {
 		return EmpresaDTO.fromEntity( empresa );
 	}
 	
+	public EmpresaDTO buscarEmpresaPorEmail( String email ){
+		Empresa empresa = repository.findByEmailIgnoreCase( email )
+				.orElseThrow(() -> new RegraDeNegocioException( "Empresa de email: " + email + " não encontrada" ));
+		return EmpresaDTO.fromEntity( empresa );
+	}
+	
 	@Transactional
 	public EmpresaDTO criarEmpresa(Empresa empresa) {
 		empresa.setSenha(encoder.encode(empresa.getSenha()));
