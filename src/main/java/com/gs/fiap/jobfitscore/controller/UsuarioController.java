@@ -47,6 +47,12 @@ public class UsuarioController {
 		return ResponseEntity.ok(dto);
 	}
 	
+	@GetMapping("/buscar-por-email")
+	public ResponseEntity<UsuarioDTO> buscarPorEmail(@RequestParam String email) {
+		UsuarioDTO usuario = uS.buscarUsuarioPorEmail(email);
+		return ResponseEntity.ok(usuario);
+	}
+
 	@PostMapping("/cadastrar")
 	public ResponseEntity<UsuarioDTO> criar(@RequestBody Usuario usuario) {
 		UsuarioDTO criado = uS.salvarUsuario(usuario);

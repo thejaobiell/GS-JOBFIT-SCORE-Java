@@ -25,6 +25,12 @@ public class UsuarioService {
 		return repository.findAll(pageable)
 				.map(UsuarioDTO::fromEntity);
 	}
+
+	public UsuarioDTO buscarUsuarioPorEmail(String email) {
+		Usuario usuario = repository.findByEmailIgnoreCase(email)
+				.orElseThrow(() -> new RegraDeNegocioException("Email não encontrado"));
+		return UsuarioDTO.fromEntity(usuario);
+	}
 	
 	public UsuarioDTO buscarUsuarioPorId( Long id ) {
 		Usuario usuario = repository.findById( id ).orElseThrow( () -> new RegraDeNegocioException( "Usuário de ID: " + id + " não encontrado." ) );

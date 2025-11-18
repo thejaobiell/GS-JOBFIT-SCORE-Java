@@ -1,10 +1,10 @@
 INSERT INTO usuarios (nome, email, senha, is_admin, refresh_token, expiracao_refresh_token) VALUES
 -- senha: joaogab
-('João Gabriel', 'joao.gabriel@jobfitscore.com', '$2a$12$Y9yI0rCtMvF3UXiPG0vzDuPz4nsM2nOGFFx9lgvOir/ozaltrEA.a', FALSE, NULL, NULL),
+('João Gabriel', 'joao.gabriel@email.com', '$2a$12$Y9yI0rCtMvF3UXiPG0vzDuPz4nsM2nOGFFx9lgvOir/ozaltrEA.a', FALSE, NULL, NULL),
 -- senha: mariasilva
-('Maria Silva', 'maria.silva@jobfitscore.com', '$2a$12$FWRuZg1nc8Yd0i.NXvNFz.n8ncUw5xSA.NbvGKhF1wlf3dHktNkqO', FALSE, NULL, NULL),
+('Maria Silva', 'maria.silva@email.com', '$2a$12$FWRuZg1nc8Yd0i.NXvNFz.n8ncUw5xSA.NbvGKhF1wlf3dHktNkqO', FALSE, NULL, NULL),
 -- senha: pedroalves
-('Pedro Alves', 'pedro.alves@jobfitscore.com', '$2a$12$aJa2FDDauhWn0ix82JvnTeuNpzW5vR9JgogJ8/6GRzIKfRjW8WXKq', FALSE, NULL, NULL);
+('Pedro Alves', 'pedro.alves@email.com', '$2a$12$aJa2FDDauhWn0ix82JvnTeuNpzW5vR9JgogJ8/6GRzIKfRjW8WXKq', FALSE, NULL, NULL);
 
 INSERT INTO empresas (nome, cnpj, email, senha, refresh_token, expiracao_refresh_token) VALUES
 -- senha: xptotech
