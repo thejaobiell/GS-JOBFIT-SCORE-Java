@@ -69,6 +69,11 @@ public class SecurityConfig {
 						
 						// Endpoints específicos de empresas
 						.requestMatchers("/api/empresas/atualizar", "/api/empresas/deletar").hasRole(Role.EMPRESA.name())
+
+						.requestMatchers("/api/empresas/buscar-por-email").permitAll()
+
+						.requestMatchers("/api/usuarios/buscar-por-email").permitAll()
+
 						
 						// Recursos compartilhados entre USUARIO e EMPRESA
 						.requestMatchers(
