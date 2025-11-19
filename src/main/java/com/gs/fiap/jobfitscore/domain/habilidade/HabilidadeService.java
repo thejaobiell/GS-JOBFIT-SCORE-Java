@@ -17,7 +17,6 @@ public class HabilidadeService {
 		this.hR = hR;
 	}
 	
-	@Cacheable("habilidades")
 	public Page<HabilidadeDTO> listarHabilidades( Pageable pageable) {
 		return hR.findAll(pageable)
 				.map(HabilidadeDTO::fromEntity);

@@ -22,9 +22,12 @@ public class VagaDTO {
 	@NotNull(message = "EmpresaId é obrigatório")
 	private Long empresaId;
 	
+	private String nomeEmpresa;
+	
 	public static VagaDTO fromEntity(Vaga vaga) {
+		String nomeEmpresa = vaga.getEmpresa() != null ? vaga.getEmpresa().getNome() : null;
 		Long empresaId = vaga.getEmpresa() != null ? vaga.getEmpresa().getId() : null;
-		return new VagaDTO(vaga.getId(), vaga.getTitulo(), empresaId);
+		return new VagaDTO(vaga.getId(), vaga.getTitulo(), empresaId, nomeEmpresa);
 	}
 	
 	public Vaga toEntity() {

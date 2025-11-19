@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UsuarioHabilidadeDTO {
 	
-	private Long id;
+	private Long id_usuario_habilidade;
 	
 	@NotNull(message = "Usuário é obrigatório")
 	private Long usuarioId;

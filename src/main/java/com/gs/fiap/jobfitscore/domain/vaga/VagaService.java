@@ -21,12 +21,10 @@ public class VagaService {
 		this.eR = eR;
 	}
 	
-	@Cacheable("vagas")
 	public Page<VagaDTO> listarVagas( Pageable pageable) {
 		return vR.findAll(pageable)
 				.map(VagaDTO::fromEntity);
 	}
-	
 	
 	public VagaDTO buscarVagaPorId(Long id) {
 		Vaga vaga = vR.findById(id)

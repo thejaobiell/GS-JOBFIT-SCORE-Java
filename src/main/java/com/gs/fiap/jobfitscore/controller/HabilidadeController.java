@@ -27,7 +27,7 @@ public class HabilidadeController {
 	@GetMapping("/listar")
 	public ResponseEntity<Map<String, Object>> listar(
 			@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size,
+			@RequestParam(defaultValue = "100") int size,
 			@RequestParam(defaultValue = "id") String sortBy) {
 		
 		Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));

@@ -23,7 +23,7 @@ public class Usuario implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_usuario")
-	private Long id;
+	private Long id_usuario;
 	
 	@Column(nullable = false, length = 100)
 	private String nome;
@@ -44,11 +44,11 @@ public class Usuario implements UserDetails {
 	private boolean admin = false;
 	
 	public Long getId() {
-		return id;
+		return id_usuario;
 	}
 	
-	public void setId(Long id) {
-		this.id = id;
+	public void setId(Long id_usuario) {
+		this.id_usuario = id_usuario;
 	}
 	
 	public String getNome() {
