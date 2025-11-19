@@ -20,11 +20,14 @@ public class UsuarioHabilidadeDTO {
 	@NotNull(message = "Habilidade é obrigatória")
 	private Long habilidadeId;
 	
+	private String habilidadeNome;
+	
 	public static UsuarioHabilidadeDTO fromEntity(UsuarioHabilidade uh) {
 		return new UsuarioHabilidadeDTO(
 				uh.getId(),
 				uh.getUsuario().getId(),
-				uh.getHabilidade().getId()
+				uh.getHabilidade().getId(),
+				uh.getHabilidade().getNome() // preenche o nome
 		);
 	}
 	

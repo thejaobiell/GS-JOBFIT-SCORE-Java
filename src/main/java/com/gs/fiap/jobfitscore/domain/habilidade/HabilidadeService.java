@@ -29,6 +29,13 @@ public class HabilidadeService {
 		return HabilidadeDTO.fromEntity(h);
 	}
 	
+	public List<HabilidadeDTO> buscarHabilidadesPorVaga(Long vagaId) {
+		List<Habilidade> habilidades = hR.buscarPorVagaId(vagaId);
+		return habilidades.stream()
+				.map(HabilidadeDTO::fromEntity)
+				.collect(Collectors.toList());
+	}
+	
 	@Transactional
 	public HabilidadeDTO cadastrarHabilidade(HabilidadeDTO dto) {
 		Habilidade h = dto.toEntity();

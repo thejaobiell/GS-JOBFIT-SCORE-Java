@@ -48,6 +48,12 @@ public class HabilidadeController {
 		return ResponseEntity.ok(dto);
 	}
 	
+	@GetMapping("/buscar-por-vaga/{vagaId}")
+	public ResponseEntity<List<HabilidadeDTO>> buscarPorVaga(@PathVariable Long vagaId) {
+		List<HabilidadeDTO> lista = hS.buscarHabilidadesPorVaga(vagaId);
+		return ResponseEntity.ok(lista);
+	}
+	
 	@PostMapping("/cadastrar")
 	public ResponseEntity<HabilidadeDTO> criar(@Valid @RequestBody HabilidadeDTO dto) {
 		HabilidadeDTO criado = hS.cadastrarHabilidade(dto);

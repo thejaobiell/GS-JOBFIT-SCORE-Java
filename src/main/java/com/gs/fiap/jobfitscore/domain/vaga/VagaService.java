@@ -32,6 +32,13 @@ public class VagaService {
 		return VagaDTO.fromEntity(vaga);
 	}
 	
+	public List<VagaDTO> listarVagasPorEmpresa(Long empresaId) {
+		return vR.findByEmpresaId(empresaId)
+				.stream()
+				.map(VagaDTO::fromEntity)
+				.collect(Collectors.toList());
+	}
+	
 	public VagaDTO cadastrarVaga(VagaDTO dto) {
 		Empresa empresa = eR.findById(dto.getEmpresaId())
 				.orElseThrow(() -> new RuntimeException("Empresa não encontrada"));
