@@ -37,10 +37,10 @@ public class VagaHabilidadeService {
 				.collect(Collectors.toList());
 	}
 	
-	public List<VagaHabilidadeDTO> buscarPorVaga(Long vagaId) {
+	public List<VagaHabilidadeComNomeDTO> buscarPorVaga(Long vagaId) {
 		return vhR.findByVaga_Id(vagaId)
 				.stream()
-				.map(VagaHabilidadeDTO::fromEntity)
+				.map(VagaHabilidadeComNomeDTO::fromEntity)
 				.collect(Collectors.toList());
 	}
 	

@@ -21,17 +21,22 @@ public class VagaService {
 		this.eR = eR;
 	}
 	
-	@Cacheable("vagas")
 	public Page<VagaDTO> listarVagas( Pageable pageable) {
 		return vR.findAll(pageable)
 				.map(VagaDTO::fromEntity);
 	}
 	
-	
 	public VagaDTO buscarVagaPorId(Long id) {
 		Vaga vaga = vR.findById(id)
 				.orElseThrow(() -> new RuntimeException("Vaga não encontrada"));
 		return VagaDTO.fromEntity(vaga);
+	}
+	
+	public List<VagaDTO> listarVagasPorEmpresa(Long empresaId) {
+		return vR.findByEmpresaId(empresaId)
+				.stream()
+				.map(VagaDTO::fromEntity)
+				.collect(Collectors.toList());
 	}
 	
 	public VagaDTO cadastrarVaga(VagaDTO dto) {
