@@ -21,6 +21,9 @@ import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -42,8 +45,8 @@ public class SecurityConfig {
 				.csrf(csrf -> csrf.disable())
 				.sessionManagement(session -> session
 						.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.cors(cors -> {}) // Habilita CORS
 				.authorizeHttpRequests(auth -> auth
-						// Endpoints públicos
 						.requestMatchers("/api/autenticacao/**").permitAll()
 						.requestMatchers("/api/usuarios/cadastrar").permitAll()
 						.requestMatchers("/api/empresas/cadastrar").permitAll()
@@ -55,7 +58,6 @@ public class SecurityConfig {
 								"/images/**",
 								"/static/**"
 						).permitAll()
-						
 						.requestMatchers(
 								"/v3/api-docs/**",
 								"/swagger-ui/**",
@@ -63,19 +65,12 @@ public class SecurityConfig {
 								"/swagger-resources/**",
 								"/webjars/**"
 						).permitAll()
-						
-						// Endpoints específicos de usuários
-						.requestMatchers("/api/usuarios/atualizar", "/api/usuarios/deletar").hasRole(Role.USUARIO.name())
-						
-						// Endpoints específicos de empresas
-						.requestMatchers("/api/empresas/atualizar", "/api/empresas/deletar").hasRole(Role.EMPRESA.name())
-
+						.requestMatchers("/api/usuarios/atualizar", "/api/usuarios/deletar")
+							.hasRole(Role.USUARIO.name())
+						.requestMatchers("/api/empresas/atualizar", "/api/empresas/deletar")
+							.hasRole(Role.EMPRESA.name())
 						.requestMatchers("/api/empresas/buscar-por-email").permitAll()
-
 						.requestMatchers("/api/usuarios/buscar-por-email").permitAll()
-
-						
-						// Recursos compartilhados entre USUARIO e EMPRESA
 						.requestMatchers(
 								"/api/cursos/**",
 								"/api/vagas/**",
@@ -125,4 +120,19 @@ public class SecurityConfig {
 		handler.setRoleHierarchy(roleHierarchy());
 		return handler;
 	}
+
+	@Bean
+		public CorsFilter corsFilter() {
+			CorsConfiguration config = new CorsConfiguration();
+			config.addAllowedOriginPattern("*");
+			config.addAllowedHeader("*");
+			config.addAllowedMethod("*");
+			config.setAllowCredentials(true);
+
+			UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+			source.registerCorsConfiguration("/**", config);
+
+			return new CorsFilter(source);
+		}
+
 }
