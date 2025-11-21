@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -45,6 +46,12 @@ public class VagaController {
 	public ResponseEntity<VagaDTO> buscar(@PathVariable Long id) {
 		VagaDTO dto = vS.buscarVagaPorId(id);
 		return ResponseEntity.ok(dto);
+	}
+	
+	@GetMapping("/buscar-por-empresa/{empresaId}")
+	public ResponseEntity<List<VagaDTO>> listarPorEmpresa(@PathVariable Long empresaId) {
+		List<VagaDTO> vagas = vS.listarVagasPorEmpresa(empresaId);
+		return ResponseEntity.ok(vagas);
 	}
 	
 	@PostMapping("/cadastrar")

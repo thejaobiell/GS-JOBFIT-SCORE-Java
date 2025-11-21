@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class EmpresaDTO {
 	
-	private Long id;
+	private Long id_empresa;
 	
 	@NotBlank(message = "Nome é obrigatório")
 	private String nome;

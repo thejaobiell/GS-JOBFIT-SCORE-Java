@@ -17,7 +17,6 @@ public class HabilidadeService {
 		this.hR = hR;
 	}
 	
-	@Cacheable("habilidades")
 	public Page<HabilidadeDTO> listarHabilidades( Pageable pageable) {
 		return hR.findAll(pageable)
 				.map(HabilidadeDTO::fromEntity);
@@ -28,6 +27,13 @@ public class HabilidadeService {
 		Habilidade h = hR.findById(id)
 				.orElseThrow(() -> new RuntimeException("Habilidade não encontrada"));
 		return HabilidadeDTO.fromEntity(h);
+	}
+	
+	public List<HabilidadeDTO> buscarHabilidadesPorVaga(Long vagaId) {
+		List<Habilidade> habilidades = hR.buscarPorVagaId(vagaId);
+		return habilidades.stream()
+				.map(HabilidadeDTO::fromEntity)
+				.collect(Collectors.toList());
 	}
 	
 	@Transactional

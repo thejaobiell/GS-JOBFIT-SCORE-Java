@@ -27,7 +27,7 @@ public class HabilidadeController {
 	@GetMapping("/listar")
 	public ResponseEntity<Map<String, Object>> listar(
 			@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size,
+			@RequestParam(defaultValue = "100") int size,
 			@RequestParam(defaultValue = "id") String sortBy) {
 		
 		Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
@@ -46,6 +46,12 @@ public class HabilidadeController {
 	public ResponseEntity<HabilidadeDTO> buscarPorId(@PathVariable Long id) {
 		HabilidadeDTO dto = hS.buscarHabilidadePorId(id);
 		return ResponseEntity.ok(dto);
+	}
+	
+	@GetMapping("/buscar-por-vaga/{vagaId}")
+	public ResponseEntity<List<HabilidadeDTO>> buscarPorVaga(@PathVariable Long vagaId) {
+		List<HabilidadeDTO> lista = hS.buscarHabilidadesPorVaga(vagaId);
+		return ResponseEntity.ok(lista);
 	}
 	
 	@PostMapping("/cadastrar")

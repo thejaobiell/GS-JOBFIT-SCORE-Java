@@ -1,5 +1,6 @@
 package com.gs.fiap.jobfitscore.controller;
 
+import com.gs.fiap.jobfitscore.domain.vagahabilidade.VagaHabilidadeComNomeDTO;
 import com.gs.fiap.jobfitscore.domain.vagahabilidade.VagaHabilidadeDTO;
 import com.gs.fiap.jobfitscore.domain.vagahabilidade.VagaHabilidadeService;
 import org.springframework.http.ResponseEntity;
@@ -30,8 +31,8 @@ public class VagaHabilidadeController {
 	}
 	
 	@GetMapping("/buscar-por-vaga")
-	public ResponseEntity<List<VagaHabilidadeDTO>> buscarPorVaga(@RequestParam Long vagaId) {
-		List<VagaHabilidadeDTO> lista = vhS.buscarPorVaga(vagaId);
+	public ResponseEntity<List<VagaHabilidadeComNomeDTO>> buscarPorVaga(@RequestParam Long vagaId) {
+		List<VagaHabilidadeComNomeDTO> lista = vhS.buscarPorVaga(vagaId);
 		return ResponseEntity.ok(lista);
 	}
 	

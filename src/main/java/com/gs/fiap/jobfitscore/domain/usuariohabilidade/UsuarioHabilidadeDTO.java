@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UsuarioHabilidadeDTO {
 	
-	private Long id;
+	private Long id_usuario_habilidade;
 	
 	@NotNull(message = "Usuário é obrigatório")
 	private Long usuarioId;
@@ -20,11 +20,14 @@ public class UsuarioHabilidadeDTO {
 	@NotNull(message = "Habilidade é obrigatória")
 	private Long habilidadeId;
 	
+	private String habilidadeNome;
+	
 	public static UsuarioHabilidadeDTO fromEntity(UsuarioHabilidade uh) {
 		return new UsuarioHabilidadeDTO(
 				uh.getId(),
 				uh.getUsuario().getId(),
-				uh.getHabilidade().getId()
+				uh.getHabilidade().getId(),
+				uh.getHabilidade().getNome() // preenche o nome
 		);
 	}
 	

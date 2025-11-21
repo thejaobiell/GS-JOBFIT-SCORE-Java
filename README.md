@@ -1,3 +1,8 @@
+# Este é um repositório de uso exclusivo para COMPLIANCE, QUALITY ASSURANCE & TESTS
+## Professor: Paulo Sergio Sampaio (pf0706)
+
+---
+
 <div align="center">
   <img src="https://raw.githubusercontent.com/thejaobiell/GS-JOBFIT-SCORE-Java/refs/heads/main/src/main/resources/static/logo.jpeg" alt="MottuFlow" width="200"/>
   <h1>JobFit-Score</h1>
